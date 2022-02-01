@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
+    <color name="card_user_avatar">#0083E1</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="change_currency_text">#141414</color>
+    <color name="main_screen_card_number_text">#141414</color>
+    <color name="card_balance_currency">#141414</color>
+    <color name="card_balance_text">#141414</color>
+    <color name="card_history_text">#141414</color>
+    <color name="item_history_name_text">#141414</color>
+    <color name="item_currency_price_text">#141414</color>
+    <color name="card_user_name">#8C9AAE</color>
+    <color name="card_user_valid_thru">#8C9AAE</color>
+    <color name="card_user_valid_thru_value">#8C9AAE</color>
+    <color name="card_your_balance_text">#8C9AAE</color>
+    <color name="item_history_name_date">#8C9AAE</color>
+    <color name="item_price_text">#8C9AAE</color>
+    <color name="main_screen_background">#FFFFFFFF</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
