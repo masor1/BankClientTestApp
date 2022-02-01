@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BankClientTestApp</string>
+    <string name="main_screen_card_valid_thru">VALID THRU</string>
+    <string name="your_balance">Your balance</string>
+    <string name="change_currency">Change currency</string>
+    <string name="history">History</string>
 </resources>

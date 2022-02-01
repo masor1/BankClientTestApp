@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_history_logo"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_netflix" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_history_name"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/item_history_name_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Netflix" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_history_date"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+        android:textColor="@color/item_history_name_date"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="15/12/2019" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_currency_price"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:textColor="@color/item_currency_price_text"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="- £ 7.99" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:gravity="center"
+        android:textColor="@color/item_price_text"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="$ 9.85" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
