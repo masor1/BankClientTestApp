@@ -21,5 +21,6 @@
     <color name="item_history_name_date">#8C9AAE</color>
     <color name="item_price_text">#8C9AAE</color>
     <color name="main_screen_background">#FFFFFFFF</color>
+    <color name="cards_screen_background">#FFFFFFFF</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
