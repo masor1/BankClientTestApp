@@ -13,6 +13,8 @@ class RVCardAdapter(
     private val listOfCard: List<Card>
 ) : RecyclerView.Adapter<RVCardAdapter.CardViewHolder>() {
 
+    var onItemClickListener: OnItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         return CardViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -25,17 +27,17 @@ class RVCardAdapter(
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val card = listOfCard[position]
-        holder.bind(card)
+        holder.bind(card, position)
     }
 
     override fun getItemCount() = listOfCard.size
 
-    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val icon = itemView.findViewById<ImageView>(R.id.item_card_icon)
         private val number = itemView.findViewById<TextView>(R.id.item_card_number)
         private val indicator = itemView.findViewById<ImageView>(R.id.item_card_indicator)
 
-        fun bind(card: Card) {
+        fun bind(card: Card, position: Int) {
             val resId = when (card.type) {
                 "mastercard" -> R.drawable.img_card_logo_master_card
                 "visa" -> R.drawable.img_card_logo_visa
@@ -49,6 +51,15 @@ class RVCardAdapter(
             } else {
                 indicator.visibility = View.INVISIBLE
             }
+
+            itemView.setOnClickListener {
+                notifyDataSetChanged()
+                onItemClickListener?.onClick(position, indicator)
+            }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onClick(position: Int, indicator: ImageView)
     }
 }

@@ -2,7 +2,7 @@ package com.masorone.bankclienttestapp.data.net.card.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Card (
+data class Card(
     var id: Int = -1,
     @SerializedName("card_number") var cardNumber: String,
     @SerializedName("type") var type: String,
@@ -15,6 +15,7 @@ data class Card (
     fun check() {
         isCheck = true
     }
+
     fun unCheck() {
         isCheck = false
     }

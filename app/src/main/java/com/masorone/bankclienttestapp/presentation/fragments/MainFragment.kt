@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -13,8 +14,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.masorone.bankclienttestapp.R
+import com.masorone.bankclienttestapp.data.repository.SharedRepositoryImpl
+import com.masorone.bankclienttestapp.data.shared_pref.SharedDataSource
+import com.masorone.bankclienttestapp.domain.usecase.CheckedCardId
 import com.masorone.bankclienttestapp.presentation.adapters.RVHistoryAdapter
-import kotlinx.coroutines.*
 
 class MainFragment : Fragment() {
 
@@ -28,6 +31,8 @@ class MainFragment : Fragment() {
     private lateinit var currencyBalance: TextView
     private lateinit var balance: TextView
     private lateinit var cardView: View
+    private lateinit var radioCurrencyButtons: RadioGroup
+    private var index = PRICE_GBP
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,19 +52,41 @@ class MainFragment : Fragment() {
         currencyBalance = view.findViewById(R.id.main_screen_card_balance_currency)
         balance = view.findViewById(R.id.main_screen_card_balance)
         rv = view.findViewById(R.id.recycler_view_history)
+        radioCurrencyButtons = view.findViewById(R.id.main_screen_currency_group)
+
+        radioCurrencyButtons.setOnCheckedChangeListener { radioGroup, _ ->
+            index = when (radioGroup?.checkedRadioButtonId) {
+                R.id.main_screen_currency_gbp -> PRICE_GBP
+                R.id.main_screen_currency_eur -> PRICE_EUR
+                else -> PRICE_RUB
+            }
+            val res = balance.text.toString().toFloat()
+            adapter.index = index
+            currencyBalance.text = String.format("%.2f", res * index)
+        }
 
         mainViewModel.liveDataOfCards.observe(requireActivity()) {
 
-            val cardChecked = it[arguments?.getInt("checkedId")!!] ?: it[0]
+            val cardChecked = it[CheckedCardId(
+                SharedRepositoryImpl(
+                    SharedDataSource.Base(requireContext())
+                )
+            ).fetch()]
 
-            icon.setImageResource(R.drawable.img_card_logo_master_card)
+            val resId = when (cardChecked.type) {
+                "mastercard" -> R.drawable.img_card_logo_master_card
+                "visa" -> R.drawable.img_card_logo_visa
+                else -> R.drawable.img_card_logo_union_pay
+            }
+
+            icon.setImageResource(resId)
             cardNumber.text = cardChecked.cardNumber
             userName.text = cardChecked.cardholderName
             date.text = cardChecked.valid
-            currencyBalance.text = (cardChecked.balance).toString()
+            currencyBalance.text = String.format("%.2f", cardChecked.balance.toFloat() * index)
             balance.text = cardChecked.balance.toString()
-
             adapter = RVHistoryAdapter(cardChecked.transactionHistory)
+            adapter.index = index
             rv.adapter = adapter
         }
     }
@@ -80,5 +107,11 @@ class MainFragment : Fragment() {
         cardView.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_cardsFragment)
         }
+    }
+
+    private companion object {
+        const val PRICE_GBP = 0.73f
+        const val PRICE_EUR = 0.88f
+        const val PRICE_RUB = 76.36f
     }
 }

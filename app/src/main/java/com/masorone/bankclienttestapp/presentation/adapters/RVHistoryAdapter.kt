@@ -13,6 +13,12 @@ import com.masorone.bankclienttestapp.data.net.card.models.Transaction
 class RVHistoryAdapter(private val list: MutableList<Transaction>) :
     RecyclerView.Adapter<RVHistoryAdapter.HistoryViewHolder>() {
 
+    var index: Float = 0.0f
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         return HistoryViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -30,7 +36,7 @@ class RVHistoryAdapter(private val list: MutableList<Transaction>) :
 
     override fun getItemCount() = list.size
 
-    class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val logo = itemView.findViewById<ImageView>(R.id.item_history_logo)
         private val name = itemView.findViewById<TextView>(R.id.item_history_name)
         private val date = itemView.findViewById<TextView>(R.id.item_history_date)
@@ -41,7 +47,7 @@ class RVHistoryAdapter(private val list: MutableList<Transaction>) :
             Glide.with(itemView.context).load(transaction.iconUrl).into(logo);
             name.text = transaction.title
             date.text = transaction.date
-            currencyPrice.text = (transaction.amount.toDouble() * 0.15).toString()
+            currencyPrice.text = String.format("%.2f", transaction.amount.toFloat() * index)
             price.text = transaction.amount
         }
     }

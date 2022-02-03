@@ -18,10 +18,10 @@
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:titleCentered="true"
-            app:titleTextColor="@color/main_tool_bar_title"
             android:background="@color/main_app_bar"
-            app:navigationIcon="@drawable/img_button_back" />
+            app:navigationIcon="@drawable/img_button_back"
+            app:titleCentered="true"
+            app:titleTextColor="@color/main_tool_bar_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
